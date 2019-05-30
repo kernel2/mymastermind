@@ -1,3 +1,4 @@
+#[derive(Debug)]
 enum Color {
     Red,
     Blue,
@@ -7,4 +8,5 @@ enum Color {
 
 fn main() {
     let guess = vec![Color::Blue, Color::Red, Color::Green, Color::Red];
+    print!("{:?}", guess);
 }
