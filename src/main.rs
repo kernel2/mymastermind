@@ -1,3 +1,10 @@
+extern crate rand;
+
+use rand::{
+    distributions::{Distribution, Standard},
+    Rng,
+};
+
 use ansi_term::Colour::{Red, Blue, Green, Yellow};
 
 #[derive(PartialEq)]
@@ -7,6 +14,17 @@ enum Color {
     Blue,
     Green,
     Yellow
+}
+
+impl Distribution<Color> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Color {
+        match rng.gen_range(0, 3) {
+            0 => Color::Red,
+            1 => Color::Blue,
+            2 => Color::Green,
+            _ => Color::Yellow,
+        }
+    }
 }
 
 fn fancy_print_guess(guess: &Vec<Color>) {
@@ -46,7 +64,12 @@ fn number_of_not_well_placed_pawns(secret: &Vec<Color>, guess: &Vec<Color>) -> i
 
 fn main() {
     let mut turn = 0;
-    let secret = vec![Color::Blue, Color::Red, Color::Green, Color::Red];
+
+    let mut secret: Vec<Color> = vec![];
+    for _ in 0..4 {
+        let color: Color = rand::random();
+        secret.push(color);
+    }
 
     println!("███╗   ███╗ █████╗ ███████╗████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗██████╗ ");
     println!("████╗ ████║██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗");
