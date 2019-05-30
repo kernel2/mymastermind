@@ -21,6 +21,16 @@ fn fancy_print_guess(guess: &Vec<Color>) {
     println!("");
 }
 
+fn number_of_well_placed_pawns(secret: &Vec<Color>, guess: &Vec<Color>) -> i32 {
+    let mut number = 0;
+    for i in 0..4 {
+        if secret[i] == guess[i] {
+            number += 1;
+        }
+    }
+    number
+}
+
 fn main() {
     let mut turn = 0;
     let secret = vec![Color::Blue, Color::Red, Color::Green, Color::Red];
@@ -77,6 +87,8 @@ fn main() {
 
         print!("Turn {}: ", turn);
         fancy_print_guess(&guess);
+
+        println!("Number of weel placed pawns: {}", number_of_well_placed_pawns(&secret, &guess));
 
         if guess == secret {
             break
