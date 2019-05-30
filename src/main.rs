@@ -6,5 +6,5 @@ enum Color {
 }
 
 fn main() {
-    println!("Hello Rust!");
+    let guess = vec![Color::Blue, Color::Red, Color::Green, Color::Red];
 }
