@@ -14,7 +14,7 @@ fn fancy_print_guess(guess: Vec<Color>) {
             Color::Red => print!("{}", Red.paint("R")),
             Color::Blue => print!("{}", Blue.paint("B")),
             Color::Green => print!("{}", Green.paint("G")),
-            Color::Yellow => print!("{}", Yellow.paint("G"))
+            Color::Yellow => print!("{}", Yellow.paint("Y"))
         }
     }
 }
@@ -29,6 +29,15 @@ fn main() {
     println!("██║ ╚═╝ ██║██║  ██║███████║   ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██████╔╝");
     println!("╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═════╝ ");
     println!("");
-    println!("Secret combination: ");
-    fancy_print_guess(guess);
+    //println!("Secret combination: ");
+    //fancy_print_guess(guess);
+
+    loop {
+        let mut guess = String::new();
+
+        std::io::stdin().read_line(&mut guess)
+          .expect("Failed to read line");
+        
+        println!("{}", guess);
+    }
 }
