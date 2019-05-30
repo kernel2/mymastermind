@@ -1,5 +1,6 @@
 use ansi_term::Colour::{Red, Blue, Green, Yellow};
 
+#[derive(PartialEq)]
 #[derive(Debug)]
 enum Color {
     Red,
@@ -8,7 +9,7 @@ enum Color {
     Yellow
 }
 
-fn fancy_print_guess(guess: Vec<Color>) {
+fn fancy_print_guess(guess: &Vec<Color>) {
     for pawn in guess {
         match pawn {
             Color::Red => print!("{}", Red.paint("R")),
@@ -21,7 +22,8 @@ fn fancy_print_guess(guess: Vec<Color>) {
 }
 
 fn main() {
-    let _secret = vec![Color::Blue, Color::Red, Color::Green, Color::Red];
+    let mut turn = 0;
+    let secret = vec![Color::Blue, Color::Red, Color::Green, Color::Red];
 
     println!("███╗   ███╗ █████╗ ███████╗████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗██████╗ ");
     println!("████╗ ████║██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗");
@@ -30,8 +32,7 @@ fn main() {
     println!("██║ ╚═╝ ██║██║  ██║███████║   ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██████╔╝");
     println!("╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═════╝ ");
     println!("");
-    //println!("Secret combination: ");
-    //fancy_print_input(input);
+    println!("Try to guess my hidden combination of colors:");
 
     loop {
         let mut input = String::new();
@@ -72,6 +73,16 @@ fn main() {
             continue;
         }
 
-        fancy_print_guess(guess);
+        turn += 1;
+
+        print!("Turn {}: ", turn);
+        fancy_print_guess(&guess);
+
+        if guess == secret {
+            break
+        }
     }
+
+    println!("🎉🎊 Congratulation this is a huge success! 🎊🎉");
+    println!("🤯 YOU are the MasterMind! 🤯");
 }
